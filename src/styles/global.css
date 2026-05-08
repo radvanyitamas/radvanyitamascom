@@ -1,11 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #00ffcc;
-  --color-dark: #050505;
-  --color-card: #121212;
+  --color-menta: #00ffcc;
+  --color-brand-blue: #3b82f6;
+  --color-dark-card: #0f0f11;
+
+  --font-poppins: "Poppins", sans-serif;
+  --font-inter: "Inter", sans-serif;
 }
 
-html {
-  scroll-behavior: smooth;
+@utility glass-card {
+  background-color: rgba(15, 15, 17, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(to right, white, var(--color-menta));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-[#050505] text-slate-400 font-inter antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-poppins text-white tracking-tight;
+  }
 }

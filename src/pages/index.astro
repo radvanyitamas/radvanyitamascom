@@ -1,54 +1,264 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import Pricing from "../components/Pricing.astro";
-import { supabase } from "../lib/supabase";
-
-// ADATLEKÉRÉS A SUPABASE-BŐL
-const { data: projects, error } = await supabase
-  .from("projects")
-  .select("*")
-  .order("created_at", { ascending: false });
-
-if (error) {
-  console.error("Hiba az adatok letöltésekor:", error);
-}
+import Navigation from "../components/Navigation.astro";
+import ContactForm from "../components/ContactForm";
 ---
 
-<Layout title="Fejlesztői Portfólió 2026">
-  <main class="max-w-6xl mx-auto px-6 py-20">
-    <Hero />
+<Layout title="Radványi Tamás | Digitális Növekedési Partner">
+  <Navigation />
 
-    <section id="projects" class="scroll-mt-32 mb-40">
-      <div class="flex items-center gap-4 mb-12">
-        <span class="w-2 h-8 bg-brand rounded-full"></span>
-        <h2 class="text-4xl font-bold tracking-tight">Kiemelt Projektek</h2>
+  <main>
+    <section
+      class="min-h-screen flex flex-col justify-center items-center px-6 pt-20 relative"
+    >
+      <div
+        class="absolute top-0 left-1/2 -ml-[40rem] w-[80rem] h-[50rem] bg-brand-blue/10 blur-[120px] -z-10"
+      >
       </div>
 
-      {
-        projects && projects.length > 0 ? (
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {projects.map((p, i) => (
-              <ProjectCard project={p} index={i} />
-            ))}
-          </div>
-        ) : (
-          <div class="text-center py-20 border border-dashed border-gray-800 rounded-[2rem]">
-            <p class="text-gray-500">
-              Még nincsenek projektek az adatbázisban.
-            </p>
-            <a
-              href="/admin"
-              class="text-brand hover:underline mt-4 inline-block text-sm"
-            >
-              Első projekt feltöltése →
-            </a>
-          </div>
-        )
-      }
+      <div class="max-w-5xl mx-auto text-center">
+        <h1 class="text-6xl md:text-8xl font-extrabold mb-8 leading-[1.1]">
+          Üzleti <span class="text-gradient">Növekedés</span><br />Digitális
+          Alapokon
+        </h1>
+        <p class="text-lg md:text-2xl max-w-2xl mx-auto mb-12 text-slate-400">
+          A weboldalad nem dísz, hanem a legfontosabb értékesítőd. Olyan
+          rendszereket építek, amik 0-24-ben vevőket hoznak neked.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-6 mb-16">
+          <a
+            href="https://tiktok.com"
+            class="text-2xl hover:text-menta transition-all"
+            ><i class="fa-brands fa-tiktok"></i></a
+          >
+          <a
+            href="https://instagram.com"
+            class="text-2xl hover:text-menta transition-all"
+            ><i class="fa-brands fa-instagram"></i></a
+          >
+          <a
+            href="https://threads.net"
+            class="text-2xl hover:text-menta transition-all"
+            ><i class="fa-brands fa-threads"></i></a
+          >
+        </div>
+      </div>
     </section>
 
-    <Pricing />
+    <section id="services" class="py-32 px-6 bg-white/[0.01]">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-6xl font-bold mb-20 italic">
+          Szolgáltatások
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="glass-card p-10 rounded-[3rem]">
+            <h3 class="text-2xl font-bold mb-6 text-menta">01. Web Engine</h3>
+            <p class="mb-6">
+              Astro 6 alapú, brutálisan gyors weboldalak. A Google imádja a
+              sebességet, a vevőid pedig nem fognak várni.
+            </p>
+            <ul class="text-sm space-y-2 text-slate-500">
+              <li>+ SEO optimalizált kód</li>
+              <li>+ Villámgyors betöltés</li>
+              <li>+ Mobil-első dizájn</li>
+            </ul>
+          </div>
+          <div
+            class="glass-card p-10 rounded-[3rem] border-t-2 border-brand-blue/30"
+          >
+            <h3 class="text-2xl font-bold mb-6 text-brand-blue">
+              02. Marketing ROI
+            </h3>
+            <p class="mb-6">
+              Hirdetési kampányok (Meta, Google), amik nem csak költik a pénzt,
+              hanem mérhető profitot termelnek.
+            </p>
+            <ul class="text-sm space-y-2 text-slate-500">
+              <li>+ Pixel & Tracking beállítás</li>
+              <li>+ Konverzió optimalizálás</li>
+              <li>+ Hirdetéskezelés</li>
+            </ul>
+          </div>
+          <div class="glass-card p-10 rounded-[3rem]">
+            <h3 class="text-2xl font-bold mb-6 text-menta">03. Automation</h3>
+            <p class="mb-6">
+              CRM rendszerek és automata válaszok. Amíg te alszol, a rendszered
+              kezeli az érdeklődőket.
+            </p>
+            <ul class="text-sm space-y-2 text-slate-500">
+              <li>+ Automata E-mail (Mailjet)</li>
+              <li>+ Időpontfoglaló rendszerek</li>
+              <li>+ Adminisztráció csökkentés</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="py-32 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-20">
+          <span
+            class="text-brand-blue font-bold tracking-widest uppercase text-sm"
+            >Portfólió</span
+          >
+          <h2 class="text-4xl md:text-6xl font-bold mt-4">Éles projektek</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32">
+          <a
+            href="https://nailsbynelly.hu"
+            target="_blank"
+            class="group glass-card rounded-[4rem] overflow-hidden"
+          >
+            <div
+              class="aspect-video bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-6xl group-hover:scale-105 transition-transform duration-700"
+            >
+              💅
+            </div>
+            <div class="p-12">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-3xl font-bold">NailsByNelly.hu</h3>
+                <span
+                  class="px-4 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-bold uppercase"
+                  >Live</span
+                >
+              </div>
+              <p class="text-lg">
+                Teljes automatizált naptárrendszer és modern webes megjelenés
+                egy sikeres szépségszalonnak.
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <h3 class="text-3xl font-bold mb-12 italic text-slate-500">
+          Demo Birodalom
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {
+            ["Építőipar", "Ingatlan", "Étterem", "Webshop"].map((demo) => (
+              <div class="glass-card p-8 rounded-[2rem] border-dashed border-white/10 group hover:border-menta/50 transition-all cursor-not-allowed">
+                <div class="text-xs font-bold uppercase mb-4 text-slate-600">
+                  Hamarosan
+                </div>
+                <h4 class="text-xl font-bold mb-2">{demo} Demo</h4>
+                <p class="text-sm">
+                  Konverzió-fókuszú prototípus {demo.toLowerCase()}{" "}
+                  vállalkozásoknak.
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="py-32 px-6 bg-white/[0.01]">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-6xl font-bold mb-20 text-center">
+          Csomagajánlatok
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="glass-card p-12 rounded-[3rem]">
+            <h4 class="text-xl font-bold mb-2">Indító</h4>
+            <div class="text-4xl font-bold mb-8">
+              149.000 <span class="text-sm font-normal text-slate-500"
+                >Ft-tól</span>
+            </div>
+            <ul class="space-y-4 mb-10 text-sm">
+              <li>✓ Modern Astro Weboldal</li>
+              <li>✓ Alapszintű SEO</li>
+              <li>✓ Kapcsolati űrlap</li>
+            </ul>
+            <a
+              href="#contact"
+              class="block text-center py-4 rounded-2xl border border-white/10 hover:bg-white/5 transition-all"
+              >Érdekel</a
+            >
+          </div>
+          <div
+            class="glass-card p-12 rounded-[3rem] border-2 border-menta relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 bg-menta text-black text-[10px] font-bold px-4 py-1 uppercase tracking-tighter"
+            >
+              Legnépszerűbb
+            </div>
+            <h4 class="text-xl font-bold mb-2">Növekedési</h4>
+            <div class="text-4xl font-bold mb-8">
+              299.000 <span class="text-sm font-normal text-slate-500"
+                >Ft-tól</span>
+            </div>
+            <ul class="space-y-4 mb-10 text-sm">
+              <li>✓ Minden ami az Alap</li>
+              <li>✓ Automata Naptár / Foglaló</li>
+              <li>✓ Meta Pixel & Tracking</li>
+              <li>✓ Mailjet Integráció</li>
+            </ul>
+            <a
+              href="#contact"
+              class="block text-center py-4 rounded-2xl bg-menta text-black font-bold hover:scale-105 transition-all"
+              >Ezt akarom</a
+            >
+          </div>
+          <div class="glass-card p-12 rounded-[3rem]">
+            <h4 class="text-xl font-bold mb-2">Dominancia</h4>
+            <div class="text-4xl font-bold mb-8">
+              Egyedi <span class="text-sm font-normal text-slate-500"
+                >ajánlat</span>
+            </div>
+            <ul class="space-y-4 mb-10 text-sm">
+              <li>✓ Teljes Marketing Stratégia</li>
+              <li>✓ Havi Hirdetéskezelés</li>
+              <li>✓ Folyamatos Optimalizálás</li>
+              <li>✓ Egyedi CRM megoldások</li>
+            </ul>
+            <a
+              href="#contact"
+              class="block text-center py-4 rounded-2xl border border-white/10 hover:bg-white/5 transition-all"
+              >Konzultáció</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tips" class="py-32 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold mb-16">
+          Tippek & <span class="text-menta">Trükkök</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="glass-card p-8 rounded-3xl">
+            <h4 class="text-xl font-bold mb-4">A 3 másodperces szabály</h4>
+            <p>
+              Ha a weboldalad nem tölt be 3 másodperc alatt, a látogatóid 40%-át
+              örökre elveszted. Használj statikus generálást (mint az Astro),
+              hogy ezt elkerüld.
+            </p>
+          </div>
+          <div class="glass-card p-8 rounded-3xl">
+            <h4 class="text-xl font-bold mb-4">Mérj mindent!</h4>
+            <p>
+              Hirdetni mérés nélkül olyan, mint sötétben nyilazni. A Facebook
+              Pixel és a Google Tag Manager alapfelszereltség kell, hogy legyen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ContactForm client:load />
+
+    <footer class="py-20 border-t border-white/5 text-center">
+      <div class="text-white font-bold mb-4">
+        RADVÁNYI<span class="text-menta">TAMÁS</span>
+      </div>
+      <p class="text-xs tracking-[0.3em] text-slate-600 uppercase">
+        Personal Brand & Digital Engine — 2026
+      </p>
+    </footer>
   </main>
 </Layout>

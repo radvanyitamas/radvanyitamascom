@@ -12,83 +12,15 @@ const { title } = Astro.props;
 <html lang="hu">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Kreatív Full-Stack Fejlesztői Portfólió"
-    />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
     <title>{title}</title>
   </head>
-  <body
-    class="bg-dark text-white antialiased min-h-screen font-sans selection:bg-brand selection:text-black flex flex-col"
-  >
-    <div
-      class="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-gray-900/40 via-dark to-dark"
-    >
-    </div>
-
-    <header
-      class="fixed top-0 w-full z-50 bg-dark/70 backdrop-blur-md border-b border-gray-800"
-    >
-      <div
-        class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between"
-      >
-        <a
-          href="#"
-          class="text-2xl font-black tracking-tighter hover:text-brand transition-colors"
-        >
-          DEV<span class="text-brand">.</span>PORTFOLIO
-        </a>
-        <nav
-          class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300"
-        >
-          <a href="#projects" class="hover:text-white transition-colors"
-            >Munkáim</a
-          >
-          <a href="#services" class="hover:text-white transition-colors"
-            >Szolgáltatások</a
-          >
-          <a
-            href="#contact"
-            class="px-5 py-2 bg-white text-black rounded-full hover:bg-brand hover:text-black transition-all"
-          >
-            Kapcsolat
-          </a>
-        </nav>
-      </div>
-    </header>
-
-    <div class="flex-1 pt-20">
-      <slot />
-    </div>
-
-    <footer class="border-t border-gray-800 bg-[#030303] py-12 mt-32">
-      <div
-        class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6"
-      >
-        <div class="text-center md:text-left">
-          <h3 class="text-xl font-bold mb-2">Dolgozzunk együtt!</h3>
-          <p class="text-gray-500 text-sm">hello@te-domained.hu</p>
-        </div>
-        <div class="flex gap-6">
-          <a href="#" class="text-gray-400 hover:text-brand transition-colors"
-            >GitHub</a
-          >
-          <a href="#" class="text-gray-400 hover:text-brand transition-colors"
-            >LinkedIn</a
-          >
-          <a href="#" class="text-gray-400 hover:text-brand transition-colors"
-            >Instagram</a
-          >
-        </div>
-      </div>
-      <div
-        class="max-w-6xl mx-auto px-6 mt-12 text-center text-gray-600 text-sm"
-      >
-        &copy; {new Date().getFullYear()} Minden jog fenntartva. Készült Astro és
-        Tailwind CSS segítségével.
-      </div>
-    </footer>
+  <body>
+    <slot />
   </body>
 </html>
