@@ -1,13 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  /* Megújult paletta: Bizalom és Profizmus */
-  --color-brand-blue: #2563eb; /* Erős királykék */
-  --color-brand-light: #60a5fa; /* Világoskék highlight */
-  --color-silver: #e2e8f0; /* Ezüstös szürke */
-  --color-pure-white: #ffffff;
-  --color-dark-bg: #020617; /* Nagyon mély kékesszürke (majdnem fekete) */
-  --color-card-bg: #0f172a; /* Kártya háttér */
+  --color-brand-blue: #2563eb;
+  --color-brand-light: #60a5fa;
+  --color-silver: #e2e8f0;
+  --color-dark-bg: #020617;
+  --color-card-bg: #0f172a;
 
   --font-poppins: "Poppins", sans-serif;
   --font-inter: "Inter", sans-serif;
@@ -34,7 +32,8 @@
   }
   h1,
   h2,
-  h3 {
-    @apply font-poppins text-pure-white tracking-tight;
+  h3,
+  h4 {
+    @apply font-poppins text-white tracking-tight;
   }
 }
