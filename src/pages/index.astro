@@ -1,11 +1,54 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Pricing from "../components/Pricing.astro";
+import { supabase } from "../lib/supabase";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// ADATLEKÉRÉS A SUPABASE-BŐL
+const { data: projects, error } = await supabase
+  .from("projects")
+  .select("*")
+  .order("created_at", { ascending: false });
+
+if (error) {
+  console.error("Hiba az adatok letöltésekor:", error);
+}
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Fejlesztői Portfólió 2026">
+  <main class="max-w-6xl mx-auto px-6 py-20">
+    <Hero />
+
+    <section id="projects" class="scroll-mt-32 mb-40">
+      <div class="flex items-center gap-4 mb-12">
+        <span class="w-2 h-8 bg-brand rounded-full"></span>
+        <h2 class="text-4xl font-bold tracking-tight">Kiemelt Projektek</h2>
+      </div>
+
+      {
+        projects && projects.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {projects.map((p, i) => (
+              <ProjectCard project={p} index={i} />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-20 border border-dashed border-gray-800 rounded-[2rem]">
+            <p class="text-gray-500">
+              Még nincsenek projektek az adatbázisban.
+            </p>
+            <a
+              href="/admin"
+              class="text-brand hover:underline mt-4 inline-block text-sm"
+            >
+              Első projekt feltöltése →
+            </a>
+          </div>
+        )
+      }
+    </section>
+
+    <Pricing />
+  </main>
 </Layout>

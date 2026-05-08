@@ -1,0 +1,60 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectManager from "../components/ProjectManager";
+---
+
+<Layout title="Admin Dashboard">
+  <main
+    id="admin-auth-layer"
+    class="max-w-4xl mx-auto px-6 py-20 opacity-0 transition-opacity duration-500"
+  >
+    <div class="flex justify-between items-end mb-12">
+      <div>
+        <a href="/" class="text-[#00FFCC] text-sm hover:underline"
+          >← Vissza a főoldalra</a
+        >
+        <h1
+          class="text-4xl font-bold mt-4 text-white font-black tracking-tighter"
+        >
+          ADMIN PANEL
+        </h1>
+      </div>
+      <button
+        id="logout-btn"
+        class="px-4 py-2 border border-red-900/30 text-red-400 text-xs rounded-lg hover:bg-red-400/10 transition-all"
+      >
+        Kijelentkezés
+      </button>
+    </div>
+
+    {
+      /* Itt hívjuk meg a React komponenst (client:load kell az interakciókhoz!) */
+    }
+    <ProjectManager client:load />
+  </main>
+</Layout>
+
+<script>
+  import { supabase } from "../lib/supabase";
+
+  // Auth ellenőrzés
+  const adminLayer = document.getElementById("admin-auth-layer");
+
+  const checkSession = async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (!session) {
+      window.location.href = "/login";
+    } else {
+      adminLayer?.classList.remove("opacity-0");
+    }
+  };
+  checkSession();
+
+  // Kijelentkezés
+  document.getElementById("logout-btn")?.addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    window.location.href = "/login";
+  });
+</script>

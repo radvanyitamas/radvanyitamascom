@@ -1,0 +1,101 @@
+---
+const pricingPackages = [
+  {
+    name: "Digitális Névjegy",
+    price: "150.000 Ft-tól",
+    description: "Ideális induló vállalkozásoknak. Egyoldalas Landing page.",
+    features: [
+      "Egyedi design",
+      "Mobilra optimalizált",
+      "Kapcsolatfelvételi űrlap",
+      "Alap SEO",
+      "1-2 hét",
+    ],
+  },
+  {
+    name: "Profi Céges Weboldal",
+    price: "350.000 Ft-tól",
+    description: "Több aloldalas weboldal saját CMS rendszerrel.",
+    features: [
+      "5-10 aloldal",
+      "Admin felület",
+      "Blog modul",
+      "Astro.js sebesség",
+      "Haladó SEO",
+    ],
+  },
+  {
+    name: "Egyedi Rendszer",
+    price: "700.000 Ft-tól",
+    description: "Komplex logikát igénylő platformok vagy webshopok.",
+    features: [
+      "Fizetési integráció",
+      "Számlázó összekötés",
+      "Regisztráció",
+      "Egyedi admin",
+      "API fejlesztés",
+    ],
+  },
+  {
+    name: "Mobilalkalmazás",
+    price: "1.500.000 Ft-tól",
+    description: "iOS és Android platformon futó alkalmazások.",
+    features: [
+      "Cross-platform fejlesztés",
+      "Store publikálás",
+      "Push értesítések",
+      "Cloud szinkron",
+      "UI/UX Tervezés",
+    ],
+  },
+];
+---
+
+<section id="services" class="scroll-mt-32">
+  <div class="flex items-center gap-4 mb-12 justify-center">
+    <span class="w-2 h-8 bg-[#00FFCC] rounded-full"></span>
+    <h2 class="text-4xl font-bold tracking-tight text-white">
+      Szolgáltatások & Árak
+    </h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {
+      pricingPackages.map((pkg) => (
+        <div class="flex flex-col bg-[#121212] border border-gray-800 rounded-3xl p-8 hover:border-[#00FFCC]/30 transition-colors relative overflow-hidden">
+          <h3 class="text-xl font-bold mb-2 text-white">{pkg.name}</h3>
+          <div class="text-3xl font-black text-[#00FFCC] mb-4">{pkg.price}</div>
+          <p class="text-gray-400 text-sm mb-8 flex-1">{pkg.description}</p>
+
+          <ul class="space-y-3 mb-8">
+            {pkg.features.map((f) => (
+              <li class="flex items-start gap-3 text-sm text-gray-300">
+                <svg
+                  class="w-5 h-5 text-[#00FFCC] shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#contact"
+            class="mt-auto w-full py-3 text-center border border-gray-700 rounded-xl hover:bg-white hover:text-black text-white font-semibold transition-all"
+          >
+            Ajánlatot kérek
+          </a>
+        </div>
+      ))
+    }
+  </div>
+</section>

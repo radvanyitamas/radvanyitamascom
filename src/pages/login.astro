@@ -1,0 +1,102 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Admin Belépés">
+  <main
+    class="max-w-md mx-auto px-6 py-32 min-h-screen flex flex-col justify-center"
+  >
+    <div class="mb-8 text-center">
+      <a
+        href="/"
+        class="text-[#00FFCC] text-sm hover:underline mb-4 inline-block"
+        >← Vissza a portfólióhoz</a
+      >
+      <h1 class="text-3xl font-bold mb-2">Admin Belépés</h1>
+      <p class="text-gray-400">A folytatáshoz azonosítás szükséges.</p>
+    </div>
+
+    <form
+      id="login-form"
+      class="space-y-4 bg-[#121212] p-8 rounded-[2rem] border border-gray-800 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
+    >
+      <div>
+        <label class="block text-sm font-medium mb-2 text-gray-300"
+          >E-mail cím</label
+        >
+        <input
+          type="email"
+          name="email"
+          required
+          class="w-full bg-black border border-gray-700 rounded-xl p-3 text-white focus:border-[#00FFCC] outline-none transition-colors"
+          placeholder="hello@pelda.hu"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-2 text-gray-300"
+          >Jelszó</label
+        >
+        <input
+          type="password"
+          name="password"
+          required
+          class="w-full bg-black border border-gray-700 rounded-xl p-3 text-white focus:border-[#00FFCC] outline-none transition-colors"
+          placeholder="••••••••"
+        />
+      </div>
+
+      <div
+        id="error-msg"
+        class="text-red-500 text-sm hidden font-medium text-center bg-red-500/10 py-2 rounded-lg border border-red-500/20"
+      >
+      </div>
+
+      <button
+        type="submit"
+        id="login-btn"
+        class="w-full py-4 mt-2 bg-[#00FFCC] text-black font-bold rounded-xl hover:shadow-[0_0_20px_rgba(0,255,204,0.3)] transition-all"
+      >
+        Bejelentkezés
+      </button>
+    </form>
+  </main>
+</Layout>
+
+<script>
+  import { supabase } from "../lib/supabase";
+
+  const form = document.getElementById("login-form") as HTMLFormElement;
+  const btn = document.getElementById("login-btn") as HTMLButtonElement;
+  const errorMsg = document.getElementById("error-msg") as HTMLDivElement;
+
+  // Ha már be van jelentkezve, egyből dobjuk át az adminba
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    if (session) window.location.href = "/admin";
+  });
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.innerText = "Hitelesítés...";
+    errorMsg.classList.add("hidden");
+
+    const formData = new FormData(form);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      errorMsg.innerText = "Hibás e-mail cím vagy jelszó!";
+      errorMsg.classList.remove("hidden");
+      btn.disabled = false;
+      btn.innerText = "Bejelentkezés";
+    } else {
+      window.location.href = "/admin"; // Sikeres belépés
+    }
+  });
+</script>
